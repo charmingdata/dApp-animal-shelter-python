@@ -15,17 +15,15 @@ from web3 import Web3
 import dash_mantine_components as dmc
 import json
 
-component = dmc.MantineProvider(withGlobalStyles=True, theme={"colorScheme": "dark"})
 with open("contract-abi.json", "r") as infile:
     abi = json.load(infile)
-
-
 
 app = Dash(
     __name__,
     external_stylesheets=[dbc.themes.CYBORG],
     external_scripts=[{"src": "../static/signerinfo.js", "type": "module"}],
 )
+
 app.layout = dbc.Container(
     [
         html.H1("Welcome to the Animal Shelter dApp!", style={"textAlign": "center"}),
@@ -366,12 +364,12 @@ clientside_callback(
     prevent_initial_call=True,
 )
 def access_shelter_data(_, value):
-    # Connect to a node:  zkEVM_rpc = "https://rpc.public.zkevm-test.net"
-    sepolia_rpc = "https://skilled-magical-wave.ethereum-sepolia.discover.quiknode.pro/8e62ba67d81c7d8a28bab69034da8cc5d9f04bea/"
-    w3 = Web3(Web3.HTTPProvider(sepolia_rpc))
+    zkEVM_rpc = "https://rpc.public.zkevm-test.net"
+    # sepolia_rpc = "https://skilled-magical-wave.ethereum-sepolia.discover.quiknode.pro/8e62ba67d81c7d8a28bab69034da8cc5d9f04bea/"
+    w3 = Web3(Web3.HTTPProvider(zkEVM_rpc))
 
     # Create an instance of the smart contract
-    address = w3.to_checksum_address("0xc6BbCfcC9aFf07D657B78F39b4A56330db375cC6")
+    address = w3.to_checksum_address("0x1245dBd38a1FF2371436245A9D7eF7AE4A9a1A26")
     contract = w3.eth.contract(address=address, abi=abi)
     try:
         (
@@ -408,9 +406,10 @@ def access_shelter_data(_, value):
     prevent_initial_call=True,
 )
 def access_shelter_data(_):
-    sepolia_rpc = "https://skilled-magical-wave.ethereum-sepolia.discover.quiknode.pro/8e62ba67d81c7d8a28bab69034da8cc5d9f04bea/"
-    w3 = Web3(Web3.HTTPProvider(sepolia_rpc))
-    address = w3.to_checksum_address("0xc6BbCfcC9aFf07D657B78F39b4A56330db375cC6")
+    # sepolia_rpc = "https://skilled-magical-wave.ethereum-sepolia.discover.quiknode.pro/8e62ba67d81c7d8a28bab69034da8cc5d9f04bea/"
+    public_zkevm_rpc = "https://rpc.public.zkevm-test.net"
+    w3 = Web3(Web3.HTTPProvider(public_zkevm_rpc))
+    address = w3.to_checksum_address("0x1245dBd38a1FF2371436245A9D7eF7AE4A9a1A26")
     contract = w3.eth.contract(address=address, abi=abi)
     # Get all ShelterInfo events. Attention that block range queries are limited by quicknode to around 10,000 blocks:
     # https://support.quicknode.com/hc/en-us/articles/10258449939473-Understanding-the-10-000-Block-Range-Limit-for-querying-Logs-and-Events
@@ -444,8 +443,8 @@ def access_shelter_data(_):
     # # continue code here from line 823.
 
     events = contract.events.ShelterInfo.get_logs(
-        fromBlock=4135936,
-        toBlock=4145030,
+        fromBlock=2157704,
+        toBlock="latest",
     )
 
     # Mapping to track the latest event data for each shelter in case there are duplicate events of the same shelter.
