@@ -8,11 +8,11 @@ from dash import (
     State,
     no_update,
 )
-import dash_bootstrap_components as dbc
-import dash_ag_grid as dag
-import pandas as pd
-from web3 import Web3
-import dash_mantine_components as dmc
+import dash_bootstrap_components as dbc  # pip install dash-bootstrap-components 
+import dash_ag_grid as dag               # pip install dash-ag-grid
+import pandas as pd                      # pip install pandas
+from web3 import Web3                    # pip install web3
+import dash_mantine_components as dmc    # pip install dash-mantine-components
 import json
 
 with open("contract-abi.json", "r") as infile:
