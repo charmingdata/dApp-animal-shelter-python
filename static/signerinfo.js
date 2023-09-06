@@ -2,6 +2,8 @@ import { ethers } from "https://cdn-cors.ethers.io/lib/ethers-5.7.2.esm.min.js";
 
 const CONTRACT_ADDRESS = "0xc6BbCfcC9aFf07D657B78F39b4A56330db375cC6";
 
+
+
 const CONTRACT_ABI = [
   {
     inputs: [],
