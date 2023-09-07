@@ -365,7 +365,6 @@ clientside_callback(
 )
 def access_shelter_data(_, value):
     zkEVM_rpc = "https://rpc.public.zkevm-test.net"
-    # sepolia_rpc = "https://skilled-magical-wave.ethereum-sepolia.discover.quiknode.pro/8e62ba67d81c7d8a28bab69034da8cc5d9f04bea/"
     w3 = Web3(Web3.HTTPProvider(zkEVM_rpc))
 
     # Create an instance of the smart contract
@@ -406,7 +405,6 @@ def access_shelter_data(_, value):
     prevent_initial_call=True,
 )
 def access_shelter_data(_):
-    # sepolia_rpc = "https://skilled-magical-wave.ethereum-sepolia.discover.quiknode.pro/8e62ba67d81c7d8a28bab69034da8cc5d9f04bea/"
     public_zkevm_rpc = "https://rpc.public.zkevm-test.net"
     w3 = Web3(Web3.HTTPProvider(public_zkevm_rpc))
     address = w3.to_checksum_address("0x1245dBd38a1FF2371436245A9D7eF7AE4A9a1A26")
@@ -444,7 +442,7 @@ def access_shelter_data(_):
 
     events = contract.events.ShelterInfo.get_logs(
         fromBlock=2157704,
-        toBlock="latest",
+        toBlock=2251521,
     )
 
     # Mapping to track the latest event data for each shelter in case there are duplicate events of the same shelter.
